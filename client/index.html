@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komal Kishore - Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#home" class="nav-logo">KK</a>
+      <div class="nav-links">
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="nav-actions">
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
+        <a href="login.html" class="nav-action-btn" id="auth-btn">Login</a>
+        <div class="hamburger" aria-label="Menu">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero" id="home">
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text" id="hero-name">Komal Kishore</span>
+        </h1>
+        <p class="hero-subtitle" id="hero-bio">
+          I build things for the web. Focused on creating clean, functional, and user-friendly experiences with modern web technologies.
+        </p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-lg btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-lg btn-outline">Contact Me</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="about">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">About Me</h2>
+        <p class="section-subtitle">What I do and the tools I work with</p>
+      </div>
+      <div class="about-grid">
+        <div class="about-text reveal" id="about-bio"></div>
+        <div class="skills-grid" id="skills-grid"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Projects</h2>
+        <p class="section-subtitle">Some things I've built</p>
+      </div>
+      <div class="projects-grid" id="projects-grid"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">Have a question or want to work together? Drop me a message.</p>
+      </div>
+      <div class="contact-wrapper reveal">
+        <form id="contact-form">
+          <div class="form-group">
+            <label for="contact-name">Name</label>
+            <input type="text" id="contact-name" name="name" placeholder="Your name">
+            <span class="form-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="contact-email">Email</label>
+            <input type="email" id="contact-email" name="email" placeholder="your@email.com">
+            <span class="form-error"></span>
+          </div>
+          <div class="form-group">
+            <label for="contact-message">Message</label>
+            <textarea id="contact-message" name="message" placeholder="What's on your mind?"></textarea>
+            <span class="form-error"></span>
+          </div>
+          <button type="submit" class="btn btn-lg btn-primary" style="width:100%">Send Message</button>
+          <div class="form-success" id="contact-success">Message sent - thanks for reaching out!</div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Built by Komal Kishore</p>
+    </div>
+  </footer>
+
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
