@@ -45,127 +45,104 @@ function initResumeDownload() {
     btn.disabled = true;
     btn.textContent = 'Generating...';
 
-    // Clone the page content for PDF
+    // Helper: build a LaTeX-style section heading with rule
+    const sectionHead = (title) =>
+      `<div style="margin-bottom:6px;">
+        <div style="font-size:11pt; font-weight:700; color:#000; text-transform:uppercase; letter-spacing:0.05em; padding-bottom:3px; border-bottom:1.5px solid #000;">${title}</div>
+      </div>`;
+
+    // Extract data from the page
+    const cards = document.querySelectorAll('.project-card');
+    const eduItems = document.querySelectorAll('.education-item');
+    const skills = Array.from(document.querySelectorAll('.sidebar-section')).find(s => s.querySelector('.sidebar-heading')?.textContent.trim() === 'Technical Skills');
+    const tools = Array.from(document.querySelectorAll('.sidebar-section')).find(s => s.querySelector('.sidebar-heading')?.textContent.trim() === 'Tools');
+    const expItems = document.querySelectorAll('.experience-item');
+
+    const skillsList = skills ? Array.from(skills.querySelectorAll('.skill-pill')).map(p => p.textContent) : [];
+    const toolsList = tools ? Array.from(tools.querySelectorAll('.skill-pill')).map(p => p.textContent) : [];
+    const summary = document.querySelector('.summary-text')?.textContent?.trim() || '';
+
+    // Build Overleaf-style PDF
     const clone = document.createElement('div');
-
-    // Build a clean resume layout for the PDF
-    const sidebar = document.querySelector('.resume-sidebar');
-    const main = document.querySelector('.resume-main');
-    const hero = document.querySelector('.hero-content');
-
-    if (!sidebar || !main || !hero) return;
-
-    // Clone hero (name + title + tagline only)
-    const heroClone = hero.cloneNode(true);
-    const heroActions = heroClone.querySelector('.hero-actions');
-    if (heroActions) heroActions.remove();
-    const heroName = heroClone.querySelector('.hero-name');
-    if (heroName) { heroName.style.fontSize = '1.75rem'; heroName.style.marginBottom = '4px'; }
-    const heroTitle = heroClone.querySelector('.hero-title');
-    if (heroTitle) { heroTitle.style.fontSize = '0.9rem'; heroTitle.style.marginBottom = '6px'; }
-    const heroTagline = heroClone.querySelector('.hero-tagline');
-    if (heroTagline) { heroTagline.style.fontSize = '0.8rem'; heroTagline.style.marginBottom = '0'; }
-
-    // Clone sidebar
-    const sidebarClone = sidebar.cloneNode(true);
-
-    // Clone main and replace projects with text-only version
-    const mainClone = main.cloneNode(true);
-    const projectsSection = mainClone.querySelector('.main-section:nth-child(2)');
-    if (projectsSection) {
-      const heading = projectsSection.querySelector('.section-heading');
-      if (heading && heading.textContent.trim() === 'Featured Projects') {
-        // Extract project data from cards, then replace with compact text list
-        const cards = main.querySelectorAll('.project-card');
-        let projectsHTML = '<h2 style="font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:#999; margin-bottom:10px;">Projects</h2>';
-        cards.forEach((card, i) => {
-          const title = card.querySelector('.project-title')?.textContent || '';
-          const desc = card.querySelector('.project-description')?.textContent?.trim() || '';
-          const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
-          projectsHTML += `
-            <div style="margin-bottom:${i < cards.length - 1 ? '12px' : '0'};">
-              <div style="font-size:0.8125rem; font-weight:600; color:#2d5a3d; margin-bottom:2px;">${title}</div>
-              <div style="font-size:0.7rem; color:#666; line-height:1.5; margin-bottom:4px;">${desc}</div>
-              <div style="font-size:0.625rem; color:#888;">${tags.join(' · ')}</div>
-            </div>`;
-        });
-        projectsSection.innerHTML = projectsHTML;
-        projectsSection.style.marginBottom = '20px';
-        projectsSection.style.paddingBottom = '20px';
-      }
-    }
-
-    // Remove fade-in classes so content is visible
-    [heroClone, sidebarClone, mainClone].forEach(el => {
-      el.querySelectorAll('.fade-in').forEach(f => {
-        f.classList.remove('fade-in');
-        f.classList.add('visible');
-      });
-      el.classList.remove('fade-in');
-    });
-
-    // Compact skill pills and section spacing for single-page PDF
-    sidebarClone.querySelectorAll('.skill-pill').forEach(pill => {
-      pill.style.padding = '2px 8px';
-      pill.style.fontSize = '0.625rem';
-      pill.style.margin = '0';
-    });
-    sidebarClone.querySelectorAll('.skills-list').forEach(list => {
-      list.style.gap = '4px';
-    });
-    sidebarClone.querySelectorAll('.sidebar-section').forEach(sec => {
-      sec.style.marginBottom = '16px';
-      sec.style.paddingBottom = '16px';
-    });
-    sidebarClone.querySelectorAll('.sidebar-heading').forEach(h => {
-      h.style.marginBottom = '8px';
-      h.style.fontSize = '0.6rem';
-    });
-    sidebarClone.querySelectorAll('.education-list').forEach(list => {
-      list.style.gap = '12px';
-    });
-    sidebarClone.querySelectorAll('.contact-list').forEach(list => {
-      list.style.gap = '6px';
-    });
-    sidebarClone.querySelectorAll('.contact-item').forEach(item => {
-      item.style.fontSize = '0.75rem';
-    });
-
-    // Compact main content
-    mainClone.querySelectorAll('.main-section').forEach(sec => {
-      sec.style.marginBottom = '20px';
-      sec.style.paddingBottom = '20px';
-    });
-    mainClone.querySelectorAll('.section-heading').forEach(h => {
-      h.style.marginBottom = '10px';
-      h.style.fontSize = '0.6rem';
-    });
-    mainClone.querySelectorAll('.summary-text').forEach(p => {
-      p.style.fontSize = '0.8125rem';
-      p.style.lineHeight = '1.6';
-    });
-    mainClone.querySelectorAll('.experience-list li').forEach(li => {
-      li.style.fontSize = '0.75rem';
-      li.style.lineHeight = '1.5';
-    });
-
-    // Build the PDF container
     clone.innerHTML = `
-      <div style="font-family: 'Inter', -apple-system, sans-serif; color: #1a1a1a; padding: 24px 32px; max-width: 800px; margin: 0 auto;">
-        <div id="pdf-hero" style="margin-bottom: 16px; padding-bottom: 14px; border-bottom: 1px solid #e8e8e8;"></div>
-        <div style="display: flex; gap: 32px;">
-          <div id="pdf-sidebar" style="width: 210px; flex-shrink: 0;"></div>
-          <div id="pdf-main" style="flex: 1;"></div>
+      <div style="font-family: 'Times New Roman', Georgia, 'DejaVu Serif', serif; color:#000; padding:28px 36px; max-width:800px; margin:0 auto; line-height:1.4;">
+
+        <!-- Header -->
+        <div style="text-align:center; margin-bottom:12px;">
+          <div style="font-size:22pt; font-weight:700; letter-spacing:0.02em;">Komal Kishore</div>
+          <div style="font-size:10pt; color:#333; margin-top:4px;">
+            Chennai, Tamil Nadu &nbsp;|&nbsp; kk2141998@gmail.com &nbsp;|&nbsp; github.com/komalkishore13
+          </div>
         </div>
+
+        <!-- Summary -->
+        ${sectionHead('Summary')}
+        <div style="font-size:9.5pt; color:#222; margin-bottom:14px; line-height:1.5;">${summary}</div>
+
+        <!-- Education -->
+        ${sectionHead('Education')}
+        <div style="margin-bottom:14px;">
+          ${Array.from(eduItems).map(item => {
+            const degree = item.querySelector('.education-degree')?.textContent || '';
+            const school = item.querySelector('.education-school')?.textContent || '';
+            const year = item.querySelector('.education-year')?.textContent || '';
+            return `<div style="display:flex; justify-content:space-between; margin-bottom:4px;">
+              <div><span style="font-size:10pt; font-weight:700;">${degree}</span> — <span style="font-size:9.5pt; color:#444;">${school}</span></div>
+              <div style="font-size:9pt; color:#666; flex-shrink:0;">${year}</div>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <!-- Technical Skills -->
+        ${sectionHead('Technical Skills')}
+        <div style="font-size:9.5pt; margin-bottom:14px; line-height:1.6;">
+          <div><span style="font-weight:700;">Languages & Frameworks:</span> ${skillsList.join(', ')}</div>
+          <div><span style="font-weight:700;">Tools:</span> ${toolsList.join(', ')}</div>
+        </div>
+
+        <!-- Projects -->
+        ${sectionHead('Projects')}
+        <div style="margin-bottom:14px;">
+          ${Array.from(cards).map(card => {
+            const title = card.querySelector('.project-title')?.textContent || '';
+            const desc = card.querySelector('.project-description')?.textContent?.trim() || '';
+            const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
+            return `<div style="margin-bottom:10px;">
+              <div style="display:flex; justify-content:space-between;">
+                <span style="font-size:10pt; font-weight:700;">${title}</span>
+                <span style="font-size:8.5pt; color:#666; font-style:italic;">${tags.join(', ')}</span>
+              </div>
+              <div style="font-size:9pt; color:#333; line-height:1.5; margin-top:2px;">${desc}</div>
+            </div>`;
+          }).join('')}
+        </div>
+
+        <!-- Experience -->
+        ${sectionHead('Experience')}
+        <div>
+          ${Array.from(expItems).map(item => {
+            const role = item.querySelector('.experience-role')?.textContent || '';
+            const company = item.querySelector('.experience-company')?.textContent || '';
+            const date = item.querySelector('.experience-date')?.textContent || '';
+            const bullets = Array.from(item.querySelectorAll('.experience-list li')).map(li => li.textContent);
+            return `<div style="margin-bottom:8px;">
+              <div style="display:flex; justify-content:space-between;">
+                <span style="font-size:10pt; font-weight:700;">${role}</span>
+                <span style="font-size:9pt; color:#666;">${date}</span>
+              </div>
+              <div style="font-size:9pt; color:#555; font-style:italic; margin-bottom:3px;">${company}</div>
+              <ul style="margin:0; padding-left:16px; font-size:9pt; color:#222; line-height:1.5;">
+                ${bullets.map(b => `<li style="margin-bottom:2px;">${b}</li>`).join('')}
+              </ul>
+            </div>`;
+          }).join('')}
+        </div>
+
       </div>
     `;
 
-    clone.querySelector('#pdf-hero').appendChild(heroClone);
-    clone.querySelector('#pdf-sidebar').appendChild(sidebarClone);
-    clone.querySelector('#pdf-main').appendChild(mainClone);
-
     const opt = {
-      margin: [6, 6, 6, 6],
+      margin: [8, 10, 8, 10],
       filename: 'Komal_Kishore_Resume.pdf',
       image: { type: 'jpeg', quality: 0.98 },
       html2canvas: { scale: 2, useCORS: true },
