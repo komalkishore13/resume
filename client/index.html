@@ -3,112 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komal Kishore - Portfolio</title>
+  <title>Komal Kishore — Full Stack Developer</title>
+  <meta name="description" content="Full-stack developer focused on building scalable web applications and interactive digital products.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-  <nav class="nav">
-    <div class="nav-inner">
-      <a href="#home" class="nav-logo">KK</a>
-      <div class="nav-links">
-        <a href="#home" class="active">Home</a>
-        <a href="#about">About</a>
-        <a href="#projects">Projects</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-actions">
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme"></button>
-        <a href="login.html" class="nav-action-btn" id="auth-btn">Login</a>
-        <div class="hamburger" aria-label="Menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </div>
-    </div>
-  </nav>
-
-  <section class="hero" id="home">
-    <div class="container">
+  <!-- ====== HERO HEADER ====== -->
+  <header class="hero" id="hero">
+    <div class="hero-inner">
       <div class="hero-content">
-        <h1 class="hero-title">
-          Hi, I'm <span class="gradient-text" id="hero-name">Komal Kishore</span>
-        </h1>
-        <p class="hero-subtitle" id="hero-bio">
-          I build things for the web. Focused on creating clean, functional, and user-friendly experiences with modern web technologies.
-        </p>
-        <div class="hero-buttons">
-          <a href="#projects" class="btn btn-lg btn-primary">View Projects</a>
-          <a href="#contact" class="btn btn-lg btn-outline">Contact Me</a>
+        <h1 class="hero-name">Komal Kishore</h1>
+        <p class="hero-title">Full Stack Developer</p>
+        <p class="hero-tagline">Building scalable web applications &amp; interactive digital products.</p>
+        <div class="hero-actions">
+          <button id="download-resume" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Resume
+          </button>
         </div>
       </div>
     </div>
-  </section>
+  </header>
 
-  <section class="section section-alt" id="about">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2 class="section-title">About Me</h2>
-        <p class="section-subtitle">What I do and the tools I work with</p>
-      </div>
-      <div class="about-grid">
-        <div class="about-text reveal" id="about-bio"></div>
-        <div class="skills-grid" id="skills-grid"></div>
-      </div>
-    </div>
-  </section>
+  <!-- ====== RESUME BODY ====== -->
+  <main class="resume">
+    <div class="resume-container">
 
-  <section class="section" id="projects">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2 class="section-title">Projects</h2>
-        <p class="section-subtitle">Some things I've built</p>
-      </div>
-      <div class="projects-grid" id="projects-grid"></div>
-    </div>
-  </section>
+      <!-- ====== LEFT COLUMN ====== -->
+      <aside class="resume-sidebar">
 
-  <section class="section section-alt" id="contact">
-    <div class="container">
-      <div class="section-header reveal">
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">Have a question or want to work together? Drop me a message.</p>
-      </div>
-      <div class="contact-wrapper reveal">
-        <form id="contact-form">
-          <div class="form-group">
-            <label for="contact-name">Name</label>
-            <input type="text" id="contact-name" name="name" placeholder="Your name">
-            <span class="form-error"></span>
+        <!-- Contact -->
+        <section class="sidebar-section">
+          <h2 class="sidebar-heading">Contact</h2>
+          <ul class="contact-list">
+            <li class="contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span>Chennai, Tamil Nadu</span>
+            </li>
+            <li class="contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              <span>kk2141998@gmail.com</span>
+            </li>
+            <li class="contact-item">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              <a href="https://github.com/komalkishore13" target="_blank" rel="noopener noreferrer">GitHub</a>
+            </li>
+          </ul>
+        </section>
+
+        <!-- Education -->
+        <section class="sidebar-section">
+          <h2 class="sidebar-heading">Education</h2>
+          <div class="education-list">
+            <div class="education-item">
+              <h3 class="education-degree">MSc International Business Management</h3>
+              <p class="education-school">Heriot-Watt University, Scotland</p>
+              <p class="education-year">2025</p>
+            </div>
+            <div class="education-item">
+              <h3 class="education-degree">BBA</h3>
+              <p class="education-school">Loyola College, Chennai</p>
+              <p class="education-year">2021</p>
+            </div>
+            <div class="education-item">
+              <h3 class="education-degree">Commerce</h3>
+              <p class="education-school">Devi Academy</p>
+              <p class="education-year">2018</p>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="contact-email">Email</label>
-            <input type="email" id="contact-email" name="email" placeholder="your@email.com">
-            <span class="form-error"></span>
-          </div>
-          <div class="form-group">
-            <label for="contact-message">Message</label>
-            <textarea id="contact-message" name="message" placeholder="What's on your mind?"></textarea>
-            <span class="form-error"></span>
-          </div>
-          <button type="submit" class="btn btn-lg btn-primary" style="width:100%">Send Message</button>
-          <div class="form-success" id="contact-success">Message sent - thanks for reaching out!</div>
-        </form>
-      </div>
-    </div>
-  </section>
+        </section>
 
+        <!-- Technical Skills -->
+        <section class="sidebar-section">
+          <h2 class="sidebar-heading">Technical Skills</h2>
+          <ul class="skills-list">
+            <li class="skill-pill">JavaScript</li>
+            <li class="skill-pill">HTML</li>
+            <li class="skill-pill">CSS</li>
+            <li class="skill-pill">Node.js</li>
+            <li class="skill-pill">Express</li>
+            <li class="skill-pill">MongoDB</li>
+            <li class="skill-pill">REST APIs</li>
+          </ul>
+        </section>
+
+        <!-- Tools -->
+        <section class="sidebar-section">
+          <h2 class="sidebar-heading">Tools</h2>
+          <ul class="skills-list">
+            <li class="skill-pill">Git</li>
+            <li class="skill-pill">GitHub</li>
+            <li class="skill-pill">VS Code</li>
+            <li class="skill-pill">MongoDB Atlas</li>
+          </ul>
+        </section>
+
+
+      </aside>
+
+      <!-- ====== RIGHT COLUMN ====== -->
+      <div class="resume-main">
+
+        <!-- Professional Summary -->
+        <section class="main-section">
+          <h2 class="section-heading">Professional Summary</h2>
+          <p class="summary-text">
+            Full-stack developer focused on building scalable web applications and interactive digital products.
+            Experienced in developing modern web platforms using JavaScript ecosystems, backend APIs, and database systems.
+            Passionate about creating performant applications and clean user experiences.
+          </p>
+        </section>
+
+        <!-- Featured Projects -->
+        <section class="main-section">
+          <h2 class="section-heading">Featured Projects</h2>
+          <div class="projects-grid" id="projects-grid">
+
+            <!-- Project 1: YouTube Clone -->
+            <article class="project-card">
+              <div class="project-image">
+                <img src="images/projects/youtube-clone.png" alt="YouTube Clone" loading="lazy">
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">YouTube Clone</h3>
+                <p class="project-description">
+                  A full-featured YouTube replica with responsive video grid layout, sidebar navigation, category filter chips,
+                  and complete sign-in authentication flow. Browse video thumbnails and interact with a realistic UI.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Next.js</span>
+                  <span class="tag">React</span>
+                  <span class="tag">Tailwind CSS</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/komalkishore13/eteepee" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                  </a>
+                  <a href="https://eteepeeproject.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- Project 3: ExpenseFlow -->
+            <article class="project-card">
+              <div class="project-image">
+                <img src="images/projects/expenseflow.png" alt="ExpenseFlow" loading="lazy">
+              </div>
+              <div class="project-body">
+                <h3 class="project-title">ExpenseFlow</h3>
+                <p class="project-description">
+                  A smart personal finance app to log income and expenses, visualize spending patterns through interactive charts,
+                  compare trends across time periods, and import/export data via CSV. Clean dashboard with real-time analytics.
+                </p>
+                <div class="project-tags">
+                  <span class="tag">Next.js</span>
+                  <span class="tag">React</span>
+                  <span class="tag">Tailwind CSS</span>
+                </div>
+                <div class="project-actions">
+                  <a href="https://github.com/komalkishore13/Expense-tracker" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                    GitHub
+                  </a>
+                  <a href="https://expense-tracker-app-psi-five.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    Live Demo
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </section>
+
+        <!-- Experience -->
+        <section class="main-section">
+          <h2 class="section-heading">Experience</h2>
+          <div class="experience-placeholder">
+            <div class="experience-item">
+              <div class="experience-header">
+                <h3 class="experience-role">Full Stack Developer</h3>
+                <span class="experience-date">Present</span>
+              </div>
+              <p class="experience-company">Freelance / Independent Projects</p>
+              <ul class="experience-list">
+                <li>Designed and developed full-stack web applications using Node.js, Express, and MongoDB</li>
+                <li>Built responsive, accessible front-end interfaces with vanilla JavaScript and modern CSS</li>
+                <li>Implemented RESTful API architectures with proper error handling and validation</li>
+                <li>Deployed applications on Vercel with continuous integration workflows</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ====== FOOTER ====== -->
   <footer class="footer">
-    <div class="container">
-      <p>Built by Komal Kishore</p>
+    <div class="footer-inner">
+      <p class="footer-text">Built by Komal Kishore</p>
+      <div class="footer-links">
+        <a href="https://github.com/komalkishore13" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+        <a href="mailto:kk2141998@gmail.com" class="footer-link">Email</a>
+      </div>
     </div>
   </footer>
 
-  <script src="js/auth.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>
