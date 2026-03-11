@@ -69,13 +69,29 @@ function initResumeDownload() {
     // Clone sidebar
     const sidebarClone = sidebar.cloneNode(true);
 
-    // Clone main but remove the Featured Projects section
+    // Clone main and replace projects with text-only version
     const mainClone = main.cloneNode(true);
     const projectsSection = mainClone.querySelector('.main-section:nth-child(2)');
     if (projectsSection) {
       const heading = projectsSection.querySelector('.section-heading');
       if (heading && heading.textContent.trim() === 'Featured Projects') {
-        projectsSection.remove();
+        // Extract project data from cards, then replace with compact text list
+        const cards = main.querySelectorAll('.project-card');
+        let projectsHTML = '<h2 style="font-size:0.6rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; color:#999; margin-bottom:10px;">Projects</h2>';
+        cards.forEach((card, i) => {
+          const title = card.querySelector('.project-title')?.textContent || '';
+          const desc = card.querySelector('.project-description')?.textContent?.trim() || '';
+          const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent);
+          projectsHTML += `
+            <div style="margin-bottom:${i < cards.length - 1 ? '12px' : '0'};">
+              <div style="font-size:0.8125rem; font-weight:600; color:#2d5a3d; margin-bottom:2px;">${title}</div>
+              <div style="font-size:0.7rem; color:#666; line-height:1.5; margin-bottom:4px;">${desc}</div>
+              <div style="font-size:0.625rem; color:#888;">${tags.join(' · ')}</div>
+            </div>`;
+        });
+        projectsSection.innerHTML = projectsHTML;
+        projectsSection.style.marginBottom = '20px';
+        projectsSection.style.paddingBottom = '20px';
       }
     }
 
