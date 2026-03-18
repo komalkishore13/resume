@@ -425,6 +425,16 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.03);
 }
 
+.project-image-zoom img {
+  object-fit: none;
+  object-position: center 45%;
+  transform: scale(1.8);
+}
+
+.project-card:hover .project-image-zoom img {
+  transform: scale(1.85);
+}
+
 .project-image-hover {
   position: relative;
 }
