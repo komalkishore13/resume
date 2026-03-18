@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initSmoothScroll();
   initResumeDownload();
+  initVideoHover();
 });
 
 
@@ -173,6 +174,25 @@ function initSmoothScroll() {
         e.preventDefault();
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
+    });
+  });
+}
+
+
+/* ---- Video Hover on Project Cards ---- */
+
+function initVideoHover() {
+  document.querySelectorAll('.project-image-hover').forEach(container => {
+    const video = container.querySelector('video');
+    if (!video) return;
+
+    container.addEventListener('mouseenter', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+
+    container.addEventListener('mouseleave', () => {
+      video.pause();
     });
   });
 }
